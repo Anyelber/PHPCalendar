@@ -1,8 +1,8 @@
 <?php
 require_once('vendor/autoload.php');
-use AnySlehider\PHPCalendary\PHPCalendary;
+use AnySlehider\PHPCalendar\PHPCalendar;
 
-$calendar = new PHPCalendary();
+$calendar = new PHPCalendar();
 $calendar->setConfig(array(
     
 ));

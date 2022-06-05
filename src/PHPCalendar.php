@@ -1,8 +1,8 @@
 <?php
 
-namespace AnySlehider\PHPCalendary;
+namespace AnySlehider\PHPCalendar;
 
-class PHPCalendary{
+class PHPCalendar{
 
         protected $config;
 
@@ -14,7 +14,7 @@ class PHPCalendary{
             $this->config = $config;
         }
 
-        public function initCalendar($HtmlId="PHPCalendary"){
+        public function initCalendar($HtmlId="PHPCalendar"){
             ?>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88=" crossorigin="anonymous">
             <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/locales-all.min.js" integrity="sha256-GcByKJnun2NoPMzoBsuCb4O2MKiqJZLlHTw3PJeqSkI=" crossorigin="anonymous"></script>

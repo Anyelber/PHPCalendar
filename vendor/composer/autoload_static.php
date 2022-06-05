@@ -9,12 +9,12 @@ class ComposerStaticInit2e688c582e63317c6e98ca2d3bdc9bd7
     public static $prefixLengthsPsr4 = array (
         'A' => 
         array (
-            'AnySlehider\\PHPCalendary\\' => 25,
+            'AnySlehider\\PHPCalendar\\' => 24,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'AnySlehider\\PHPCalendary\\' => 
+        'AnySlehider\\PHPCalendar\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

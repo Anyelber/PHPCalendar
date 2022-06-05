@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AnySlehider\\PHPCalendary\\' => array($baseDir . '/src'),
+    'AnySlehider\\PHPCalendar\\' => array($baseDir . '/src'),
 );
