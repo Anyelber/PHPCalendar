@@ -1,0 +1,16 @@
+{
+    "name": "anyslehider/php-calendary",
+    "description": "Calendary Serverside Plugin",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "AnySlehider\\PHPCalendary\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "AnySlehider",
+            "email": "anyslehider@gmail.com"
+        }
+    ]
+}
