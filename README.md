@@ -1,1 +1,1 @@
-# PHPCalendary
+# PHPCalendar
