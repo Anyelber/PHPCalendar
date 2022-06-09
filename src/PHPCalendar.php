@@ -32,6 +32,7 @@ class PHPCalendar{
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script>
 
                 let eventList = JSON.parse('<?=$this->listItems()?>');
@@ -51,10 +52,13 @@ class PHPCalendar{
                         dateClick: function(info) {
                             $("input[name='event_date_anycal']").val(info.dateStr);
                             $("#createEventModal").modal('show');
-                            //console.log('Clicked on: ' + info.dateStr);
-                            //alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-                            //alert('Current view: ' + info.view.type);
-                            //info.dayEl.style.backgroundColor = 'red';
+                        },
+                        eventClick: function(info){
+                            $("#viewEventModal").modal('show');
+                            $("#eventName").html(info.event.title);
+                            $("#eventDate").html(info.event.start);
+                            $("#eventHref").attr("href", "<?=$this->config['delete_route']?>?deleteAnyCalEvent="+info.event.id);
+                            console.log(info.event.title);
                         },
 
 
@@ -98,6 +102,35 @@ class PHPCalendar{
                     </div>
                 </div>
             </form>
+
+
+            <div class="modal fade" id="viewEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Event Info</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label><b>Event Name</b></label><br>
+                            <span id="eventName"></span>
+                        </div>
+                        <div class="form-group">
+                            <label><b>Event Date</b></label><br>
+                            <span id="eventDate"></span>
+                        </div>
+                        <br>
+                        <a id="eventHref" class="btn btn-danger">Delete Event</a>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
                  
             <?php
 
@@ -111,6 +144,17 @@ class PHPCalendar{
                 ":event_name"=>$name,
                 ":event_date"=>$date
             ]);
+            $this->alert("Event saved successfully", $this->config['return_url'], 1);
+        }
+
+        public function deleteEvent($eventId){
+            $pdo = $this->connection->pdo();
+
+            $q = $pdo->prepare("DELETE FROM events_anycal WHERE id = :id");
+            $q->execute([
+                ":id"=>$eventId
+            ]);
+            $this->alert("Event deleted successfully", $this->config['return_url'], 1);
         }
 
         public function listItems(){
@@ -131,5 +175,26 @@ class PHPCalendar{
 
 
             return json_encode($eventList);
+        }
+
+        public function alert($msj,$url,$type){
+            if($type == 0){
+                $type = 'error';
+            }elseif($type == 1){
+                $type = 'success';
+            }else{
+                $type = 'warning';
+            }
+            ?>
+                <script>
+                    Swal.fire(
+                        '',
+                        '<?=$msj?>',
+                        '<?=$type?>'
+                    ).then(function loaded(){
+                        window.location.href = '<?=$url?>';
+                    });
+                </script>
+            <?php
         }
 }

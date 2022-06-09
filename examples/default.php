@@ -13,6 +13,10 @@ $calendar->setConfig(array(
    'db_user'=>'root',
    'db_password'=>'',
    'db_name'=>'PHPCalendar',
+
+   //aditional info
+   'delete_route' => '',
+   'return_url' => 'default.php'
 ));
 $calendar->initCalendar('calendar');
 
@@ -22,6 +26,10 @@ if(isset($_POST["save_event_anycal"])){
         $_POST["event_name_anycal"],
         $_POST["event_date_anycal"]
     );  
+}
+
+if(isset($_GET['deleteAnyCalEvent'])){
+  $calendar->deleteEvent($_GET['deleteAnyCalEvent']);
 }
 ?>
 
