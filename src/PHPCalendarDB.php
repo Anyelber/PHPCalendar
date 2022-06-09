@@ -6,12 +6,14 @@ use PDO;
 
 class PHPCalendarDB{
 
+    protected $sql;
     protected $host;
     protected $user;
     protected $password;
     protected $database;
 
-    public function __construct($host, $user, $password, $database){
+    public function __construct($sql, $host, $user, $password, $database){
+        $this->sql = $sql;
         $this->host = $host;
         $this->user = $user;
         $this->password = $password;
@@ -20,7 +22,7 @@ class PHPCalendarDB{
     }
 
     public function pdo(){
-        $pdo = new PDO('mysql:host='.$this->host.';dbname='.$this->database, $this->user, $this->password);
+        $pdo = new PDO($this->sql.':host='.$this->host.';dbname='.$this->database, $this->user, $this->password);
         return $pdo;
     }
 

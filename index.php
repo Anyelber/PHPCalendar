@@ -8,6 +8,7 @@ $calendar->setConfig(array(
    'form_action_url' => '',
 
    //db data
+   'sql' => 'mysql',
    'db_host'=>'localhost',
    'db_user'=>'root',
    'db_password'=>'',

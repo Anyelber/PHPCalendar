@@ -19,7 +19,7 @@ class PHPCalendar{
 
         public function setConfig($config){
             $this->config = $config;
-            $this->connection = new PHPCalendarDB($this->config['db_host'], $this->config['db_user'], $this->config['db_password'], $this->config['db_name']);
+            $this->connection = new PHPCalendarDB($this->config['sql'], $this->config['db_host'], $this->config['db_user'], $this->config['db_password'], $this->config['db_name']);
             $this->initModal();
         }
 
